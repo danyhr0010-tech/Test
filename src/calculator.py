@@ -11,7 +11,7 @@ class Calculator:
 
     def add(self, a: float, b: float) -> float:
         """
-        Suma dos números.
+        Suma dos números. Pueden ser enteros o decimales.
 
         Args:
             a: Primer número
