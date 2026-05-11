@@ -17,10 +17,7 @@
       },
       {
         "group": "API Reference",
-        "openapi": "docs/openapi.json",
-        "pages": [
-          "untitled-page"
-        ]
+        "openapi": "docs/openapi.json"
       }
     ]
   }
