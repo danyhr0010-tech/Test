@@ -17,9 +17,7 @@
   "paths": {
     "/calculator/add": {
       "post": {
-        "tags": [
-          "Calculator"
-        ],
+        "tags": ["Calculator"],
         "summary": "Suma dos números",
         "description": "Realiza la suma de dos números y devuelve el resultado.",
         "operationId": "add_calculator_add_post",
@@ -69,9 +67,7 @@
     },
     "/calculator/subtract": {
       "post": {
-        "tags": [
-          "Calculator"
-        ],
+        "tags": ["Calculator"],
         "summary": "Resta dos números",
         "description": "Realiza la resta de dos números y devuelve el resultado.",
         "operationId": "subtract_calculator_subtract_post",
@@ -121,9 +117,7 @@
     },
     "/calculator/multiply": {
       "post": {
-        "tags": [
-          "Calculator"
-        ],
+        "tags": ["Calculator"],
         "summary": "Multiplica dos números",
         "description": "Realiza la multiplicación de dos números y devuelve el resultado.",
         "operationId": "multiply_calculator_multiply_post",
@@ -173,9 +167,7 @@
     },
     "/calculator/divide": {
       "post": {
-        "tags": [
-          "Calculator"
-        ],
+        "tags": ["Calculator"],
         "summary": "Divide dos números",
         "description": "Realiza la división de dos números y devuelve el resultado. Lanza error si se intenta dividir por cero.",
         "operationId": "divide_calculator_divide_post",
@@ -225,9 +217,7 @@
     },
     "/calculator/power": {
       "post": {
-        "tags": [
-          "Calculator"
-        ],
+        "tags": ["Calculator"],
         "summary": "Calcula la potencia de un número",
         "description": "Eleva un número base a un exponente y devuelve el resultado.",
         "operationId": "power_calculator_power_post",
@@ -277,9 +267,7 @@
     },
     "/statistics/mean": {
       "post": {
-        "tags": [
-          "Statistics"
-        ],
+        "tags": ["Statistics"],
         "summary": "Calcula el promedio",
         "description": "Calcula la media aritmética de una lista de números.",
         "operationId": "calculate_mean_statistics_mean_post",
@@ -329,9 +317,7 @@
     },
     "/statistics/median": {
       "post": {
-        "tags": [
-          "Statistics"
-        ],
+        "tags": ["Statistics"],
         "summary": "Calcula la mediana",
         "description": "Calcula la mediana de una lista de números.",
         "operationId": "calculate_median_statistics_median_post",
@@ -381,9 +367,7 @@
     },
     "/statistics/std-dev": {
       "post": {
-        "tags": [
-          "Statistics"
-        ],
+        "tags": ["Statistics"],
         "summary": "Calcula la desviación estándar",
         "description": "Calcula la desviación estándar de una lista de números.",
         "operationId": "calculate_std_dev_statistics_std_dev_post",
@@ -433,9 +417,7 @@
     },
     "/": {
       "get": {
-        "tags": [
-          "Root"
-        ],
+        "tags": ["Root"],
         "summary": "Root",
         "description": "Endpoint raíz de la API.\n\nReturns:\n    Mensaje de bienvenida con información de la API",
         "operationId": "root__get",
@@ -453,9 +435,7 @@
     },
     "/health": {
       "get": {
-        "tags": [
-          "Health"
-        ],
+        "tags": ["Health"],
         "summary": "Health Check",
         "description": "Endpoint de health check.\n\nReturns:\n    Estado de salud del servicio",
         "operationId": "health_check_health_get",
@@ -490,12 +470,9 @@
           }
         },
         "type": "object",
-        "required": [
-          "a",
-          "b"
-        ],
+        "required": ["a", "b"],
         "title": "CalculatorRequest",
-        "description": "Modelo para peticiones de operaciones de calculadora con dos operandos.\n\nAttributes:\n    a: Primer operando\n    b: Segundo operando"
+        "description": "Modelo para peticiones prueba prueba de operaciones de calculadora con dos operandos.\n\nAttributes:\n    a: Primer operando\n    b: Segundo operando"
       },
       "CalculatorResponse": {
         "properties": {
@@ -513,10 +490,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "result",
-          "operation"
-        ],
+        "required": ["result", "operation"],
         "title": "CalculatorResponse",
         "description": "Modelo para respuestas de operaciones de calculadora.\n\nAttributes:\n    result: Resultado de la operación\n    operation: Nombre de la operación realizada"
       },
@@ -536,10 +510,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "error",
-          "detail"
-        ],
+        "required": ["error", "detail"],
         "title": "ErrorResponse",
         "description": "Modelo para respuestas de error.\n\nAttributes:\n    error: Mensaje de error\n    detail: Detalles adicionales del error"
       },
@@ -566,19 +537,11 @@
             "minItems": 1,
             "title": "Numbers",
             "description": "Lista de números para el cálculo estadístico",
-            "example": [
-              1.0,
-              2.0,
-              3.0,
-              4.0,
-              5.0
-            ]
+            "example": [1.0, 2.0, 3.0, 4.0, 5.0]
           }
         },
         "type": "object",
-        "required": [
-          "numbers"
-        ],
+        "required": ["numbers"],
         "title": "StatisticsRequest",
         "description": "Modelo para peticiones de operaciones estadísticas.\n\nAttributes:\n    numbers: Lista de números para calcular estadísticas"
       },
@@ -604,11 +567,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "result",
-          "operation",
-          "count"
-        ],
+        "required": ["result", "operation", "count"],
         "title": "StatisticsResponse",
         "description": "Modelo para respuestas de operaciones estadísticas.\n\nAttributes:\n    result: Resultado del cálculo estadístico\n    operation: Nombre de la operación realizada\n    count: Cantidad de números procesados"
       },
@@ -645,11 +604,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
+        "required": ["loc", "msg", "type"],
         "title": "ValidationError"
       }
     }
