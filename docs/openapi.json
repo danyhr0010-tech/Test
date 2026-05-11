@@ -1,0 +1,657 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Math API",
+    "description": "\n    API REST para operaciones matemáticas y estadísticas.\n    \n    Esta API proporciona endpoints para:\n    * **Calculadora**: Operaciones matemáticas básicas (suma, resta, multiplicación, división, potencia)\n    * **Estadísticas**: Cálculos estadísticos (promedio, mediana, desviación estándar)\n    \n    ## Versiones\n    \n    ### v2.0 (Actual)\n    - Operaciones de calculadora (5 endpoints)\n    - Operaciones estadísticas (3 endpoints)\n    - Soporte para CORS\n    \n    ### v1.0 (Deprecada)\n    - Solo operaciones de calculadora\n    \n    ## Autenticación\n    \n    Esta API no requiere autenticación actualmente.\n    \n    ## Rate Limiting\n    \n    No hay límites de tasa configurados actualmente.\n    ",
+    "contact": {
+      "name": "Math API Team",
+      "url": "https://github.com/test-repository/test",
+      "email": "support@example.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "2.0.0"
+  },
+  "paths": {
+    "/calculator/add": {
+      "post": {
+        "tags": [
+          "Calculator"
+        ],
+        "summary": "Suma dos números",
+        "description": "Realiza la suma de dos números y devuelve el resultado.",
+        "operationId": "add_calculator_add_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculatorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "El resultado de la suma",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculatorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calculator/subtract": {
+      "post": {
+        "tags": [
+          "Calculator"
+        ],
+        "summary": "Resta dos números",
+        "description": "Realiza la resta de dos números y devuelve el resultado.",
+        "operationId": "subtract_calculator_subtract_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculatorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "El resultado de la resta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculatorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calculator/multiply": {
+      "post": {
+        "tags": [
+          "Calculator"
+        ],
+        "summary": "Multiplica dos números",
+        "description": "Realiza la multiplicación de dos números y devuelve el resultado.",
+        "operationId": "multiply_calculator_multiply_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculatorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "El resultado de la multiplicación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculatorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calculator/divide": {
+      "post": {
+        "tags": [
+          "Calculator"
+        ],
+        "summary": "Divide dos números",
+        "description": "Realiza la división de dos números y devuelve el resultado. Lanza error si se intenta dividir por cero.",
+        "operationId": "divide_calculator_divide_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculatorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "El resultado de la división",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculatorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calculator/power": {
+      "post": {
+        "tags": [
+          "Calculator"
+        ],
+        "summary": "Calcula la potencia de un número",
+        "description": "Eleva un número base a un exponente y devuelve el resultado.",
+        "operationId": "power_calculator_power_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculatorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "El resultado de la potenciación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculatorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statistics/mean": {
+      "post": {
+        "tags": [
+          "Statistics"
+        ],
+        "summary": "Calcula el promedio",
+        "description": "Calcula la media aritmética de una lista de números.",
+        "operationId": "calculate_mean_statistics_mean_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatisticsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "El promedio de los números proporcionados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statistics/median": {
+      "post": {
+        "tags": [
+          "Statistics"
+        ],
+        "summary": "Calcula la mediana",
+        "description": "Calcula la mediana de una lista de números.",
+        "operationId": "calculate_median_statistics_median_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatisticsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "La mediana de los números proporcionados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statistics/std-dev": {
+      "post": {
+        "tags": [
+          "Statistics"
+        ],
+        "summary": "Calcula la desviación estándar",
+        "description": "Calcula la desviación estándar de una lista de números.",
+        "operationId": "calculate_std_dev_statistics_std_dev_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatisticsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "La desviación estándar de los números proporcionados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "Root"
+        ],
+        "summary": "Root",
+        "description": "Endpoint raíz de la API.\n\nReturns:\n    Mensaje de bienvenida con información de la API",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health Check",
+        "description": "Endpoint de health check.\n\nReturns:\n    Estado de salud del servicio",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CalculatorRequest": {
+        "properties": {
+          "a": {
+            "type": "number",
+            "title": "A",
+            "description": "Primer número de la operación",
+            "example": 10.0
+          },
+          "b": {
+            "type": "number",
+            "title": "B",
+            "description": "Segundo número de la operación",
+            "example": 5.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "a",
+          "b"
+        ],
+        "title": "CalculatorRequest",
+        "description": "Modelo para peticiones de operaciones de calculadora con dos operandos.\n\nAttributes:\n    a: Primer operando\n    b: Segundo operando"
+      },
+      "CalculatorResponse": {
+        "properties": {
+          "result": {
+            "type": "number",
+            "title": "Result",
+            "description": "Resultado de la operación",
+            "example": 15.0
+          },
+          "operation": {
+            "type": "string",
+            "title": "Operation",
+            "description": "Operación realizada",
+            "example": "addition"
+          }
+        },
+        "type": "object",
+        "required": [
+          "result",
+          "operation"
+        ],
+        "title": "CalculatorResponse",
+        "description": "Modelo para respuestas de operaciones de calculadora.\n\nAttributes:\n    result: Resultado de la operación\n    operation: Nombre de la operación realizada"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "title": "Error",
+            "description": "Tipo de error",
+            "example": "ValueError"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail",
+            "description": "Descripción del error",
+            "example": "Division by zero"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "detail"
+        ],
+        "title": "ErrorResponse",
+        "description": "Modelo para respuestas de error.\n\nAttributes:\n    error: Mensaje de error\n    detail: Detalles adicionales del error"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "StatisticsRequest": {
+        "properties": {
+          "numbers": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Numbers",
+            "description": "Lista de números para el cálculo estadístico",
+            "example": [
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "numbers"
+        ],
+        "title": "StatisticsRequest",
+        "description": "Modelo para peticiones de operaciones estadísticas.\n\nAttributes:\n    numbers: Lista de números para calcular estadísticas"
+      },
+      "StatisticsResponse": {
+        "properties": {
+          "result": {
+            "type": "number",
+            "title": "Result",
+            "description": "Resultado del cálculo",
+            "example": 3.0
+          },
+          "operation": {
+            "type": "string",
+            "title": "Operation",
+            "description": "Operación realizada",
+            "example": "mean"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "description": "Cantidad de números procesados",
+            "example": 5
+          }
+        },
+        "type": "object",
+        "required": [
+          "result",
+          "operation",
+          "count"
+        ],
+        "title": "StatisticsResponse",
+        "description": "Modelo para respuestas de operaciones estadísticas.\n\nAttributes:\n    result: Resultado del cálculo estadístico\n    operation: Nombre de la operación realizada\n    count: Cantidad de números procesados"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
