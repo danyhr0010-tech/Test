@@ -1,5 +1,5 @@
 ---
-title: Welcome to Math API SERVICEBOTS AI
+title: Math API SERVICEBOTS AI
 description: REST API for mathematical operations and statistics
 ---
 
