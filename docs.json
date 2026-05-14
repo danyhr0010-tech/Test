@@ -9,7 +9,7 @@
     "groups": [
       {
         "group": "Overview",
-        "pages": ["index", "docs/README"]
+        "pages": ["index"]
       },
       {
         "group": "Contributing",
