@@ -39,7 +39,7 @@ Everything you need to create world-class documentation.
 
 Make your docs work for humans and AI agents alike.
 
-### 🤖 AI & Agents
+### 🤖 AI&Agents
 
 - [cite_start][**Prompt component**](/agent-ready/prompt): Embed shareable AI prompts. [cite: 14]
 - [cite_start][**Visibility**](/agent-ready/visibility): Show different content to humans and agents. [cite: 15]
