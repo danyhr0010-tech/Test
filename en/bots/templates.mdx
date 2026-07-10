@@ -1,0 +1,65 @@
+---
+title: "Bot Templates"
+description: "Create bots quickly using predefined templates"
+---
+
+<br />
+
+Templates allow you to create bots with pre-configured conversation flows, accelerating development time.
+
+## What is a template
+
+A template is a complete bot (flow + configuration) that serves as a starting point. It includes:
+
+- **Conversation flow** with pre-defined nodes and connections
+- **Voice configuration** (TTS, STT, LLM)
+- **Template variables** that are replaced when creating the bot (e.g., `${templateCompanyName}`)
+- **Bot parameters** (CSV columns for outbound campaigns)
+
+## Create a bot from a template
+
+<Steps>
+  <Step title="Open the creation modal">
+    Click **"New bot"** in the sidebar.
+  </Step>
+  <Step title="Select a template">
+    In the **"Use a template"** section, browse the templates available for your project. Each card shows the template name and description.
+  </Step>
+  <Step title="Confirm selection">
+    Click the desired template. A dialog will ask: *"Would you like to use the template [name]?"*. Click **"Continue"**.
+  </Step>
+  <Step title="Configure variables">
+    A form will open with:
+
+    | Field | Description |
+    |---|---|
+    | **Bot name** | Name for your new bot (required) |
+    | **Template description** | Template description (read-only) |
+    | **Variables** | Editable table with template variables |
+    | **Parameters** | Bot parameters list (read-only) |
+
+    Fill in each variable with the value corresponding to your use case.
+  </Step>
+  <Step title="Create the bot">
+    Click **"Create bot"** and confirm. The bot is created with the template flow and variables replaced.
+  </Step>
+</Steps>
+
+## Template variables
+
+Variables use the `${variableName}` format and are automatically replaced when creating the bot. Common examples:
+
+| Variable | Description | Example |
+|---|---|---|
+| `${templateCompanyName}` | Company name | "Acme Corp" |
+| `${templateAgentName}` | Virtual agent name | "Sofia" |
+| `${templateLanguage}` | Service language | "English" |
+| `${templateSchedule}` | Business hours | "Monday to Friday, 9am-6pm" |
+
+## Manage templates (Admin)
+
+<Info>
+  Template management requires **Root** or **Superadmin** role.
+</Info>
+
+Administrators can create, edit, and delete templates from the admin view.

@@ -1,0 +1,143 @@
+---
+title: "Ver Conversaciones"
+description: "Visualiza y filtra todas las conversaciones de tus bots en tu proyecto"
+---
+
+<br />
+
+La página de Conversaciones muestra todas las conversaciones que tus bots han gestionado. Puedes filtrar por fecha, estado, número de teléfono o ID de conversación.
+
+## Acceder a conversaciones
+
+Navega a **Conversations** desde el menú principal. La página muestra las conversaciones del día seleccionado (UTC).
+
+## Lista de conversaciones
+
+La tabla muestra las siguientes columnas:
+
+| Columna | Descripción |
+|---|---|
+| **Date** | Fecha y hora de creación de la conversación |
+| **Campaign** | Nombre de la campaña asociada |
+| **Bot** | Nombre del bot, versión y tipo |
+| **Conversation ID** | Identificador único (clic para copiar) |
+| **Phone** | Número de teléfono de destino |
+| **Status** | Estado actual de la conversación |
+
+## Filtros
+
+Puedes filtrar conversaciones usando tres modos (uno a la vez):
+
+| Filtro | Descripción |
+|---|---|
+| **Por Conversation ID** | Buscar por ID exacto de conversación |
+| **Por Phone** | Buscar por número de teléfono (10+ dígitos) |
+| **Por Status** | Filtrar por uno o más valores de estado |
+
+## Estados de conversación
+
+| Estado | Descripción |
+|---|---|
+| <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>pending</span> | Llamada en cola, esperando ser marcada |
+| <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_call</span> | La llamada nunca se realizó |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_open_websocket</span> | Falló la conexión WebSocket |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_botflow</span> | Error en el flujo del bot (clasificación faltante) |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_failed</span> | La transferencia de llamada falló |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_answer</span> | El destinatario no contestó |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>voicemail</span> | La llamada llegó al buzón de voz |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>answer_no_reply</span> | La llamada conectó pero el usuario no habló |
+| <span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>in_progress</span> | Llamada activa |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished_asr</span> | El flujo del bot llegó al nodo final |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished</span> | Conversación completada |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_successful</span> | Llamada transferida exitosamente |
+
+## Detalle de conversación
+
+Haz clic en **"Details"** en cualquier fila de conversación para abrir la vista detallada. Este modal muestra toda la información de una conversación individual.
+
+### Tarjetas de información
+
+En la parte superior de la vista detallada, una fila de tarjetas muestra:
+
+| Tarjeta | Descripción |
+|---|---|
+| **Date** | Fecha y hora de la conversación |
+| **Conversation ID** | ID único (clic para copiar) |
+| **Campaign** | Campaña asociada |
+| **Session ID** | Identificador de sesión de llamada (si está disponible) |
+| **Bot** | Nombre del bot, versión y tipo |
+| **Phone** | Número de teléfono de destino |
+| **Status** | Estado actual |
+
+### Reproducción de audio
+
+Si la conversación tiene una grabación de llamada, se muestra un reproductor de audio. Puedes escuchar la grabación completa directamente en la vista detallada.
+
+<Info>
+  Las grabaciones se almacenan temporalmente. Si una grabación ha expirado, un mensaje indicará que ya no está disponible.
+</Info>
+
+### Parámetros y estado
+
+Haz clic en el botón **"Parameters"** para ver:
+
+- **Input Params** — Parámetros pasados a la conversación (ej. nombre del cliente, número de cuenta)
+- **State** — Variables de estado de la conversación y sus valores
+
+### Transcripción
+
+La sección de transcripción muestra el intercambio completo de la conversación. El formato depende del tipo de bot:
+
+#### Transcripción VoiceAgent
+
+Para bots VoiceAgent, cada mensaje se muestra con un tag de color según el rol:
+
+| Rol | Descripción |
+|---|---|
+| <span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>assistant</span> | Respuestas del bot |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>user</span> | Voz del usuario (transcrita) |
+| <span style={{backgroundColor: '#722ED1', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>system</span> | Instrucciones del sistema |
+| <span style={{backgroundColor: '#fa8c16', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>tool</span> | Resultados de funciones |
+
+**Filtrado**: Usa los checkboxes de rol para mostrar u ocultar mensajes por rol (System, Assistant, User, Tool).
+
+#### Transcripción estándar (VoiceBot / ChatBot)
+
+Para bots estándar, la transcripción muestra:
+
+| Columna | Descripción |
+|---|---|
+| **Date and time** | Timestamp del mensaje |
+| **Assistant** | Texto de respuesta del bot |
+| **User** | Entrada del usuario (voz o texto) |
+| **Classification** | Resultado de clasificación NLP |
+| **User audio** | Reproductor de audio de la voz del usuario (solo VoiceBot) |
+
+### Métricas de rendimiento
+
+<Info>
+  Las métricas solo están disponibles para conversaciones **VoiceAgent** y requieren rol **Admin** o **Developer**.
+</Info>
+
+#### Métricas agregadas
+
+| Métrica | Descripción |
+|---|---|
+| **Median STT TTFB** | Tiempo al primer byte de speech-to-text |
+| **Median LLM TTFB** | Tiempo al primer byte del LLM |
+| **Median TTS TTFB** | Tiempo al primer byte de text-to-speech |
+| **Median latency** | Latencia general de respuesta |
+| **Total TTS characters** | Caracteres sintetizados |
+| **Total tokens** | Total de tokens LLM consumidos |
+
+#### Métricas por mensaje
+
+Activa el toggle **"Metrics"** para ver datos de rendimiento por mensaje:
+
+- Tipo de procesador (STT / LLM / TTS)
+- TTFB y latencia por mensaje
+- Desglose de tokens (prompt, completion, cache)
+
+### Enlace compartible
+
+Haz clic en **"Get link"** en el pie del modal para copiar una URL directa a esta conversación. Compártela con tu equipo para acceso rápido.

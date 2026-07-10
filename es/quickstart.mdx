@@ -1,0 +1,119 @@
+---
+title: "Quickstart: Crear un Bot"
+description: "Crea tu primer bot en AI Studio en minutos"
+---
+
+<br />
+
+Sigue estos pasos para crear un bot rápidamente en AI Studio.
+
+## Requisitos previos
+
+- Una cuenta activa en AI Studio con rol **Admin** o **Developer**
+- Un proyecto donde asociar tu bot
+
+---
+
+## Paso 1: Abrir la página de Bots
+
+Inicia sesión en AI Studio. Serás redirigido automáticamente a la página de **Bots**.
+
+<Frame caption="AI Studio - Página de Bots">
+  <img src="/images/bots-page.png" />
+</Frame>
+
+---
+
+## Paso 2: Crear tu bot
+
+<Steps>
+  <Step title="Clic en New bot">
+    Haz clic en el botón **"New bot"** en el panel lateral izquierdo. Elige **"Crear desde cero"** o **"Usar una plantilla"**.
+
+    <Frame caption="Modal para crear un nuevo bot">
+      <img src="/images/create-bot-modal.png" />
+    </Frame>
+  </Step>
+
+  <Step title="Elegir nombre y tipo">
+    Ingresa un **Bot Name** y selecciona un **Bot Type**:
+
+    <Frame caption="Seleccionando un tipo de bot">
+      <img src="/images/bot-type-select.png" />
+    </Frame>
+
+    Selecciona **VoiceAgent** como tipo de bot. Es un agente de voz con IA y LLM, ideal para experiencias conversacionales por teléfono.
+  </Step>
+
+  <Step title="Clic en Create">
+    Tu bot se crea con versión `00001` y tag <span style={{backgroundColor: '#722ED1', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Dev</span> por defecto. Aparecerá en el panel lateral listo para configurar.
+  </Step>
+</Steps>
+
+---
+
+## Paso 3: Agregar nodos al flujo
+
+Haz clic en **"Add Node"** en la barra de herramientas. Cada nodo es un paso en la conversación. Configura los mensajes y funciones del nodo en el panel lateral.
+
+<Frame caption="Editando un nodo de VoiceAgent">
+  <img src="/images/bot-node.png" />
+</Frame>
+
+---
+
+## Paso 4: Configurar voz y LLM
+
+Haz clic en **"Bot Config"** en la barra de herramientas para configurar:
+
+- **TTS** — Proveedor de voz y selección de voz
+- **STT** — Proveedor de reconocimiento de voz e idioma
+- **LLM** — Proveedor del modelo de IA y temperatura
+
+---
+
+## Paso 5: Guardar
+
+Haz clic en **"Save"** en la barra de herramientas. Tu bot está listo.
+
+---
+
+## Paso 6: Probar y revisar
+
+Una vez guardado tu bot, realiza una llamada de prueba. Para ejecutar tu bot a escala con una lista de contactos, ve a la sección de [Campañas](/es/campaigns/create-campaign) donde puedes subir un CSV y ejecutar llamadas masivas.
+
+Después de una llamada, navega a **Conversations** para revisar cómo fue.
+
+<Frame caption="Página de Conversaciones">
+  <img src="/images/conversations-page.png" />
+</Frame>
+
+Ahí puedes:
+
+- Escuchar la **grabación de la llamada**
+- Leer la **transcripción completa** (mensajes de assistant, user, system y tool)
+- Revisar las **métricas de rendimiento** (latencia, tokens, TTS)
+- Ver los **parámetros y estado** de la conversación
+
+<Frame caption="Detalle de conversación">
+  <img src="/images/conversation-details.png" />
+</Frame>
+
+---
+
+## Siguiente paso
+
+<CardGroup cols={2}>
+  <Card title="Flujo conversacional" icon="diagram-project" href="/es/bots/conversation-flow">
+    Diseña flujos con nodos, conexiones y funciones.
+  </Card>
+  <Card title="Configuración de voz" icon="microphone" href="/es/bots/voice-configuration">
+    Configura las opciones de TTS, STT y LLM.
+  </Card>
+  <Card title="Campañas" icon="megaphone" href="/es/campaigns/create-campaign">
+    Ejecuta tu bot a escala con campañas masivas.
+  </Card>
+  <Card title="Conversaciones" icon="comments" href="/es/conversations/view-conversations">
+    Visualiza y filtra todas las conversaciones de tus bots.
+  </Card>
+</CardGroup>

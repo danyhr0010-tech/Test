@@ -1,23 +1,97 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Math API Documentation",
+  "name": "AI Studio",
   "theme": "mint",
-  "colors": {
-    "primary": "#3B82F6"
+  "css": "/global.css",
+  "logo": {
+    "light": "/images/logo.svg",
+    "dark": "/images/logo.svg",
+    "size": 200
   },
+  "colors": {
+    "primary": "#2479DC",
+    "light": "#4A93E6",
+    "dark": "#1B5DAA"
+  },
+  "favicon": "/favicon.svg",
   "navigation": {
-    "groups": [
+    "languages": [
       {
-        "group": "Overview",
-        "pages": ["index"]
+        "language": "en",
+        "default": true,
+        "tabs": [
+          {
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "pages": ["en/introduction", "en/quickstart"]
+              },
+              {
+                "group": "Bots",
+                "pages": [
+                  "en/bots/create-bot",
+                  "en/bots/bot-types",
+                  "en/bots/conversation-flow",
+                  "en/bots/voice-configuration",
+                  "en/bots/templates"
+                ]
+              },
+              {
+                "group": "Conversations",
+                "pages": [
+                  "en/conversations/view-conversations"
+                ]
+              },
+              {
+                "group": "Campaigns",
+                "pages": [
+                  "en/campaigns/create-campaign",
+                  "en/campaigns/run-campaign",
+                  "en/campaigns/campaign-dashboard"
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
-        "group": "Contributing",
-        "pages": ["docs/CONTRIBUTING"]
-      },
-      {
-        "group": "API Reference",
-        "openapi": "docs/openapi.json"
+        "language": "es",
+        "tabs": [
+          {
+            "tab": "Documentacion",
+            "groups": [
+              {
+                "group": "Inicio",
+                "pages": ["es/introduction", "es/quickstart"]
+              },
+              {
+                "group": "Bots",
+                "pages": [
+                  "es/bots/create-bot",
+                  "es/bots/bot-types",
+                  "es/bots/conversation-flow",
+                  "es/bots/voice-configuration",
+                  "es/bots/templates"
+                ]
+              },
+              {
+                "group": "Conversaciones",
+                "pages": [
+                  "es/conversations/view-conversations"
+                ]
+              },
+              {
+                "group": "Campañas",
+                "pages": [
+                  "es/campaigns/create-campaign",
+                  "es/campaigns/run-campaign",
+                  "es/campaigns/campaign-dashboard"
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   }

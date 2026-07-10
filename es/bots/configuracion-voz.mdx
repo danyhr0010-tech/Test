@@ -1,0 +1,122 @@
+---
+title: "Configuracion de Voz"
+description: "Configura los proveedores de TTS, STT y LLM para tu bot"
+---
+
+<br />
+
+La configuracion de voz define como tu bot habla (TTS), escucha (STT) y piensa (LLM). Se accede desde el boton **"Bot Config"** en la barra de herramientas del editor.
+
+## Text-to-Speech (TTS)
+
+AI Studio soporta dos proveedores de TTS:
+
+<Tabs>
+  <Tab title="ElevenLabs">
+    Voces de alta calidad con clonacion de voz y control fino de parametros.
+
+    | Parametro | Tipo | Descripcion |
+    |---|---|---|
+    | `model` | string | Modelo de ElevenLabs |
+    | `voice_id` | string | ID de la voz seleccionada |
+    | `stability` | float (0-1) | Estabilidad de la voz |
+    | `similarity_boost` | float (0-1) | Similitud con la voz original |
+    | `speed` | float | Velocidad de reproduccion |
+    | `style` | float (0-1) | Estilo expresivo |
+    | `use_speaker_boost` | boolean | Mejora de calidad del speaker |
+
+    ```json
+    {
+      "provider": "elevenlabs",
+      "elevenlabs": {
+        "model": "your-model",
+        "voice_id": "your-voice-id",
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1.0
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab title="Microsoft Azure">
+    Voces neurales de Azure Cognitive Services con amplio soporte de idiomas.
+
+    | Parametro | Tipo | Descripcion |
+    |---|---|---|
+    | `voice` | string | Nombre de la voz |
+
+    ```json
+    {
+      "provider": "microsoft",
+      "microsoft": {
+        "voice": "es-MX-YourVoice"
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Speech-to-Text (STT)
+
+Configuracion del reconocimiento de voz:
+
+| Parametro | Descripcion |
+|---|---|
+| **Provider** | Motor de reconocimiento |
+| **Model** | Modelo de reconocimiento |
+| **Language** | Idioma principal |
+
+```json
+{
+  "stt": {
+    "provider": "your-provider",
+    "model": "your-model",
+    "language": "es"
+  }
+}
+```
+
+## Large Language Model (LLM)
+
+El LLM genera las respuestas conversacionales del VoiceAgent. Configura tu proveedor y modelo preferido desde el panel de Bot Config.
+
+```json
+{
+  "llm": {
+    "provider": "your-provider",
+    "model": "your-model",
+    "temperature": 0.7
+  }
+}
+```
+
+<Warning>
+  La configuracion de LLM solo aplica para bots de tipo **VoiceAgent**. Los VoiceBots usan NLP basado en reglas.
+</Warning>
+
+## Opciones adicionales
+
+| Opcion | Descripcion |
+|---|---|
+| **Noise Filter** | Habilita filtrado de ruido en el audio de entrada |
+| **User Idle** | Configura comportamiento cuando el usuario esta inactivo |
+| **Global Functions** | Funciones disponibles en todos los nodos del bot |
+| **Bot Actions** | Acciones globales del bot (ej. saludo inicial) |
+
+## Funciones globales
+
+Las funciones globales estan disponibles en **todos los nodos** del bot, a diferencia de las funciones por nodo que solo aplican en un paso especifico.
+
+```json
+{
+  "global_functions": [
+    {
+      "name": "consultar_horario",
+      "description": "Consulta el horario de atencion",
+      "properties": [],
+      "handler": { "mode": "custom_code", "code": "..." }
+    }
+  ]
+}
+```

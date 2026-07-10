@@ -1,0 +1,143 @@
+---
+title: "View Conversations"
+description: "View and filter all bot conversations in your project"
+---
+
+<br />
+
+The Conversations page displays all conversations that your bots have handled. You can filter by date, status, phone number, or conversation ID.
+
+## Accessing conversations
+
+Navigate to **Conversations** from the main menu. The page shows conversations for a selected date (UTC).
+
+## Conversation list
+
+The table displays the following columns:
+
+| Column | Description |
+|---|---|
+| **Date** | Date and time the conversation was created |
+| **Campaign** | Associated campaign name |
+| **Bot** | Bot name, version, and type |
+| **Conversation ID** | Unique identifier (click to copy) |
+| **Phone** | Destination phone number |
+| **Status** | Current conversation status |
+
+## Filters
+
+You can filter conversations using three modes (one at a time):
+
+| Filter | Description |
+|---|---|
+| **By Conversation ID** | Search by exact conversation ID |
+| **By Phone** | Search by phone number (10+ digits) |
+| **By Status** | Filter by one or more status values |
+
+## Conversation statuses
+
+| Status | Description |
+|---|---|
+| <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>pending</span> | Call is queued, waiting to be dialed |
+| <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_call</span> | Call was never launched |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_open_websocket</span> | WebSocket connection failed |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_botflow</span> | Bot flow error (missing classification) |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_failed</span> | Call transfer failed |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_answer</span> | Recipient did not answer |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>voicemail</span> | Call reached voicemail |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>answer_no_reply</span> | Call connected but user did not speak |
+| <span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>in_progress</span> | Call is active |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished_asr</span> | Bot flow reached final node |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished</span> | Conversation completed |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_successful</span> | Call transferred successfully |
+
+## Conversation detail
+
+Click **"Details"** on any conversation row to open the full detail view. This modal shows all information about a single conversation.
+
+### Info cards
+
+At the top of the detail view, a row of cards displays:
+
+| Card | Description |
+|---|---|
+| **Date** | Conversation date and time |
+| **Conversation ID** | Unique ID (click to copy) |
+| **Campaign** | Associated campaign |
+| **Session ID** | Call session identifier (if available) |
+| **Bot** | Bot name, version, and type |
+| **Phone** | Destination phone number |
+| **Status** | Current status |
+
+### Audio playback
+
+If the conversation has a call recording, an audio player is displayed. You can listen to the full recording directly in the detail view.
+
+<Info>
+  Recordings are stored temporarily. If a recording has expired, a message will indicate it is no longer available.
+</Info>
+
+### Parameters and state
+
+Click the **"Parameters"** button to view:
+
+- **Input Params** — Parameters passed to the conversation (e.g., customer name, account number)
+- **State** — Current conversation state variables and their values
+
+### Transcript
+
+The transcript section shows the full conversation exchange. The format depends on the bot type:
+
+#### VoiceAgent transcript
+
+For VoiceAgent bots, each message is displayed with a role-based color tag:
+
+| Role | Description |
+|---|---|
+| <span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>assistant</span> | Bot responses |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>user</span> | User speech (transcribed) |
+| <span style={{backgroundColor: '#722ED1', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>system</span> | System instructions |
+| <span style={{backgroundColor: '#fa8c16', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>tool</span> | Function call results |
+
+**Filtering**: Use the role checkboxes to show or hide messages by role (System, Assistant, User, Tool).
+
+#### Standard transcript (VoiceBot / ChatBot)
+
+For standard bots, the transcript shows:
+
+| Column | Description |
+|---|---|
+| **Date and time** | Message timestamp |
+| **Assistant** | Bot response text |
+| **User** | User input (speech or text) |
+| **Classification** | NLP classification result |
+| **User audio** | Audio player for user speech (VoiceBot only) |
+
+### Performance metrics
+
+<Info>
+  Metrics are only available for **VoiceAgent** conversations and require **Admin** or **Developer** role.
+</Info>
+
+#### Aggregate metrics
+
+| Metric | Description |
+|---|---|
+| **Median STT TTFB** | Speech-to-text time to first byte |
+| **Median LLM TTFB** | LLM time to first byte |
+| **Median TTS TTFB** | Text-to-speech time to first byte |
+| **Median latency** | Overall response latency |
+| **Total TTS characters** | Characters synthesized |
+| **Total tokens** | Total LLM tokens consumed |
+
+#### Per-message metrics
+
+Enable the **"Metrics"** toggle to see per-message performance data:
+
+- Processor type (STT / LLM / TTS)
+- TTFB and latency per message
+- Token usage breakdown (prompt, completion, cache)
+
+### Shareable link
+
+Click **"Get link"** in the modal footer to copy a direct URL to this conversation. Share it with your team for quick access.

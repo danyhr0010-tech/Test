@@ -1,0 +1,67 @@
+---
+title: "Voice Configuration"
+description: "Configure TTS, STT, and LLM providers for your bot"
+---
+
+<br />
+
+The voice configuration defines how your bot speaks (TTS), listens (STT), and thinks (LLM). Access it from the **"Bot Config"** button in the editor toolbar.
+
+## Text-to-Speech (TTS)
+
+AI Studio supports two TTS providers:
+
+<Tabs>
+  <Tab title="ElevenLabs">
+    High-quality voices with voice cloning and fine parameter control.
+
+    | Parameter | Type | Description |
+    |---|---|---|
+    | `model` | string | ElevenLabs model |
+    | `voice_id` | string | Selected voice ID |
+    | `stability` | float (0-1) | Voice stability |
+    | `similarity_boost` | float (0-1) | Similarity to original voice |
+    | `speed` | float | Playback speed |
+    | `style` | float (0-1) | Expressive style |
+    | `use_speaker_boost` | boolean | Speaker quality enhancement |
+  </Tab>
+
+  <Tab title="Microsoft Azure">
+    Azure Cognitive Services neural voices with broad language support.
+
+    | Parameter | Type | Description |
+    |---|---|---|
+    | `voice` | string | Voice name |
+  </Tab>
+</Tabs>
+
+## Speech-to-Text (STT)
+
+Speech recognition configuration:
+
+| Parameter | Description |
+|---|---|
+| **Provider** | Recognition engine |
+| **Model** | Recognition model |
+| **Language** | Primary language |
+
+## Large Language Model (LLM)
+
+The LLM generates the VoiceAgent's conversational responses. Configure your preferred provider and model from the Bot Config panel.
+
+<Warning>
+  LLM configuration only applies to **VoiceAgent** type bots. VoiceBots use rule-based NLP.
+</Warning>
+
+## Additional options
+
+| Option | Description |
+|---|---|
+| **Noise Filter** | Enable noise filtering on input audio |
+| **User Idle** | Configure behavior when the user is idle |
+| **Global Functions** | Functions available across all bot nodes |
+| **Bot Actions** | Global bot actions (e.g., initial greeting) |
+
+## Global functions
+
+Global functions are available in **all nodes** of the bot, unlike per-node functions that only apply to a specific step.

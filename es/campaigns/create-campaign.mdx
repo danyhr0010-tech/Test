@@ -1,0 +1,147 @@
+---
+title: "Crear una Campaña"
+description: "Gestiona campañas de comunicación masiva con tus bots"
+---
+
+<br />
+
+Una **campaña** es una operación masiva de contacto saliente que comunica automáticamente con una lista de números telefónicos usando uno de tus bots. Subes un CSV con contactos, vinculas la campaña a una versión de bot y la ejecutas — el sistema se encarga del resto.
+
+Las campañas soportan dos modos de ejecución según el tipo de bot:
+
+| Modo | Tipos de Bot | Canal |
+|---|---|---|
+| **Voz** | VoiceBot, VoiceAgent | Llamadas telefónicas |
+| **Chat** | ChatBot | Mensajes de WhatsApp |
+
+## Saliente vs entrante
+
+| Tipo | Descripción |
+|---|---|
+| **Saliente** | El sistema inicia el contacto con cada número de la lista. Este es el modo por defecto. |
+| **Entrante** | El sistema espera contactos entrantes. Las campañas entrantes no se pueden ejecutar manualmente desde la interfaz. |
+
+## Acceder a campañas
+
+Navega a **Campaigns** desde el menú principal. La página muestra todas las campañas del proyecto seleccionado.
+
+## Lista de campañas
+
+La tabla muestra las siguientes columnas:
+
+| Columna | Descripción |
+|---|---|
+| **Date** | Fecha de creación de la campaña |
+| **Campaign name** | Nombre asignado durante la creación |
+| **Bot** | Bot asociado y su versión |
+| **Registers qty** | Cantidad de registros de contacto cargados |
+
+## Filtros y ordenamiento
+
+| Columna | Filtro | Ordenar |
+|---|---|---|
+| **Date** | Selector de fecha | — |
+| **Campaign name** | Búsqueda de texto (sin distinción de mayúsculas) | Alfabético |
+| **Bot** | Búsqueda de texto (sin distinción de mayúsculas) | — |
+| **Registers qty** | — | — |
+
+## Acciones de campaña
+
+Desde cada fila puedes:
+
+| Acción | Descripción |
+|---|---|
+| **Info** | Ver detalles de la campaña (ID, bot, archivo, fechas) |
+| **Run** | Ejecutar la campaña (abre el modal de ejecución) |
+| **Registers** | Ver todos los registros cargados (teléfonos y parámetros) |
+| **Update** | Subir registros CSV adicionales a la campaña |
+| **Dashboard** | Abrir el panel de análisis de una ejecución completada |
+
+## Crear una campaña
+
+<Steps>
+  <Step title="Abrir el formulario de creación">
+    Haz clic en **"New campaign"** en la barra superior de la página de Campañas.
+  </Step>
+  <Step title="Nombrar la campaña">
+    Ingresa un nombre descriptivo para la campaña.
+  </Step>
+  <Step title="Seleccionar un bot">
+    Usa el selector de bot para elegir un bot y su versión. El selector muestra los bots agrupados por nombre, con las versiones disponibles listadas debajo de cada uno.
+
+    El tipo de bot determina el canal de ejecución:
+    - **VoiceBot / VoiceAgent** — llamadas telefónicas
+    - **ChatBot** — mensajes de WhatsApp
+
+    <Note>Los bots de tipo Avatar no están disponibles para campañas.</Note>
+  </Step>
+  <Step title="Subir el archivo CSV">
+    Sube un archivo CSV con los contactos para la campaña.
+
+    <a href="/files/sample-campaign.csv" download>Descargar CSV de ejemplo</a>
+
+    **Requisitos del formato CSV:**
+
+    | Requisito | Detalles |
+    |---|---|
+    | **Columna requerida** | `to_phone` — el número telefónico destino de cada contacto |
+    | **Formato de teléfono** | 7 a 16 dígitos, debe comenzar con un dígito diferente de cero |
+    | **Delimitador** | Punto y coma (`;`) separa las columnas |
+    | **Columnas adicionales** | Deben usar el prefijo `param_` seguido del nombre del parámetro definido en el flujo del bot (ej. `param_name`, `param_account_number`) |
+    | **Multi-teléfono** | Un campo `to_phone` puede contener múltiples números separados por comas |
+
+    Después de subir, el sistema muestra el total de registros y números telefónicos detectados.
+
+    <Warning>El máximo de registros por campaña es 15,000.</Warning>
+  </Step>
+  <Step title="Configurar auto-ejecución (opcional)">
+    Activa **Auto-run** para iniciar la campaña inmediatamente después de crearla.
+
+    La disponibilidad de auto-ejecución depende de la configuración de telefonía o mensajería de tu organización:
+    - **Campañas de voz** — requiere una configuración válida de troncal (línea telefónica o SIP)
+    - **Campañas de chat** — requiere un número de WhatsApp configurado
+
+    Cuando auto-run está desactivado, la campaña se crea pero debe ejecutarse manualmente desde la lista de campañas.
+  </Step>
+  <Step title="Crear">
+    Haz clic en **"Create"** para finalizar. El sistema procesa y valida tus contactos en segundo plano.
+
+    Si algún registro falla en la validación, puedes descargar los registros no procesados como CSV.
+  </Step>
+</Steps>
+
+## Opciones avanzadas
+
+Durante la creación puedes configurar el comportamiento de reintentos de la campaña:
+
+### Estados de resultado
+
+Selecciona qué estados de resultado de conversación deben ser elegibles para re-procesamiento cuando la campaña se ejecute nuevamente. Por ejemplo, podrías elegir reintentar solo los contactos que resultaron en `no_answer` o `voicemail`.
+
+Estados disponibles:
+
+| Estado | Descripción |
+|---|---|
+| <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>pending</span> | Contacto en cola |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_call</span> | La llamada nunca se realizó |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_open_websocket</span> | Falló la conexión |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_botflow</span> | Error en el flujo del bot |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_failed</span> | Transferencia fallida |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_answer</span> | Sin respuesta |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>voicemail</span> | Buzón de voz |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>answer_no_reply</span> | Conectó pero sin respuesta |
+| <span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>in_progress</span> | Actualmente activo |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished_asr</span> | Alcanzó el nodo final |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished</span> | Completado |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_successful</span> | Transferencia exitosa |
+
+### Estados personalizados
+
+Define pares clave-valor que filtran contactos basándose en valores personalizados del estado de la conversación. Solo los contactos que coincidan con los criterios de estado especificados serán incluidos en ejecuciones posteriores.
+
+## Roles requeridos
+
+| Acción | Roles |
+|---|---|
+| Ver campañas | Todos los usuarios autenticados |
+| Crear, ejecutar o actualizar campañas | Admin, Developer, Tester |

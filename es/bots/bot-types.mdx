@@ -1,0 +1,83 @@
+---
+title: "Tipos de Bot"
+description: "Conoce los diferentes tipos de bot disponibles en AI Studio y sus casos de uso"
+---
+
+<br />
+
+AI Studio soporta 4 tipos de bot, cada uno optimizado para diferentes canales y casos de uso.
+
+## Comparativa
+
+| Tipo           | Canal         | IA/LLM           | Caso de uso                                |
+| -------------- | ------------- | ---------------- | ------------------------------------------ |
+| **VoiceBot**   | Telefonía     | No (reglas)      | IVR tradicional, menús de opciones         |
+| **VoiceAgent** | Telefonía     | Sí (LLM)         | Atención al cliente conversacional, ventas |
+| **ChatBot**    | WhatsApp/Chat | No (reglas)      | Soporte por texto, notificaciones          |
+| **Avatar**     | Web           | Sí (LLM + video) | Atención visual interactiva                |
+| **ApiBot**     | API           | Configurable     | Integraciones backend-to-backend           |
+
+---
+
+## VoiceBot
+
+<Card title="Bot de voz basado en reglas" icon="phone">
+  Ideal para flujos IVR tradicionales con menús de opciones y respuestas
+  predefinidas.
+</Card>
+
+- Usa reconocimiento de voz (ASR)
+- Procesamiento NLP con modos generativos o basados en reglas
+- Soporte para entrada DTMF (teclado telefónico)
+- Nodos con outputs predefinidos que determinan la navegación
+
+---
+
+## VoiceAgent
+
+<Card title="Agente de voz con IA" icon="robot">
+  El tipo más avanzado. Usa LLMs para mantener conversaciones naturales y
+  ejecutar acciones.
+</Card>
+
+- Potenciado por LLMs para conversaciones naturales
+- TTS de alta calidad (ElevenLabs, Microsoft Azure)
+- Funciones invocables (tools) para ejecutar acciones
+- RAG para consultar bases de conocimiento
+- Acciones pre/post nodo (transferencias, TTS, fin de llamada)
+- Estrategias de contexto (append, reset, reset_with_summary)
+
+### Capacidades clave
+
+| Característica       | Descripción                                               |
+| -------------------- | --------------------------------------------------------- |
+| **Role Messages**    | Define la personalidad global del agente                  |
+| **Task Messages**    | Instrucciones específicas por nodo                        |
+| **Functions**        | Herramientas que el LLM puede invocar                     |
+| **RAG**              | Consulta vectorial para búsquedas en base de conocimiento |
+| **Context Strategy** | Control del historial de conversación                     |
+| **Pre/Post Actions** | Automatización de acciones                                |
+
+---
+
+## ChatBot
+
+<Card title="Bot de texto para mensajería" icon="comments">
+  Diseñado para canales de texto como WhatsApp. Soporta mensajes enriquecidos.
+</Card>
+
+- Mensajes de texto, botones interactivos, listas y plantillas
+- Integración con WhatsApp Business API
+- Flujo basado en reglas con outputs definidos
+
+---
+
+## ApiBot
+
+<Card title="Bot para integraciones API" icon="bolt">
+  Bot headless para integraciones backend-to-backend vía API.
+</Card>
+
+- Sin interfaz de usuario directa
+- Se invoca programáticamente
+- Ideal para automatizaciones y pipelines

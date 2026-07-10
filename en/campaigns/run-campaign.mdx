@@ -1,0 +1,69 @@
+---
+title: "Run a Campaign"
+description: "Execute a campaign to contact your list via voice calls or WhatsApp"
+---
+
+<br />
+
+Once a campaign is created, you can execute it one or more times. Each execution creates a separate **run** with its own analytics and results. The run process differs based on the bot type.
+
+## Running a voice campaign
+
+For VoiceBot and VoiceAgent campaigns, click **Run** on the campaign row to open the call list configuration.
+
+### Call list options
+
+| Option | Description |
+|---|---|
+| **Trunk type** | The telephony connection method for outbound calls (see below) |
+| **Max simultaneous calls** | Maximum number of concurrent calls during execution |
+| **Phone regex** | Optional regular expression to filter which phone number to dial when a contact has multiple numbers |
+| **RTC mode** | <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Beta</span> Enables real-time communication mode |
+
+### Trunk types
+
+The trunk type determines how outbound calls are connected:
+
+| Trunk Type | Description |
+|---|---|
+| **PSTN** | Standard phone network calls using a configured caller ID |
+| **SIP** | Calls routed through a SIP connection with server address and extension |
+| **External Dialer** | Calls placed through a third-party dialer service with a configurable time limit |
+
+<Note>RTC mode is automatically enabled for External Dialer trunk type and VoiceAgent bots.</Note>
+
+## Running a chat campaign
+
+For ChatBot campaigns, click **Run** to open the chat execution modal. Select the **WhatsApp number** to send messages from, then confirm execution.
+
+## Re-running a campaign
+
+You can run the same campaign multiple times. When you trigger a new run on a previously executed campaign:
+
+1. The system detects existing runs and displays their dates.
+2. A confirmation dialog asks whether you want to proceed.
+3. If reply statuses or states were configured, only contacts matching those filters are included in the new run.
+
+This allows you to retry contacts that did not answer, reached voicemail, or had other outcomes on previous runs.
+
+## Stopping a run
+
+For voice campaigns, you can stop an active run from the [Campaign Dashboard](/en/campaigns/campaign-dashboard):
+
+| Action | Description |
+|---|---|
+| **Stop call list** | Halts the current call list execution. Pending calls are cancelled. |
+| **Recover call list** | Resumes a previously stopped call list. |
+| **Cancel external dialer** | Cancels an external dialer execution. |
+
+<Warning>Stopping a call list cannot be undone — pending calls in that list will not be placed. Use **Recover** to resume if needed.</Warning>
+
+## Execution flow
+
+When a campaign is run, the system processes contacts in the background:
+
+1. **Registers are prepared** — each contact from the CSV becomes an individual execution record.
+2. **Phone selection** — if contacts have multiple phone numbers and a regex filter was provided, the matching number is selected.
+3. **Contacts are distributed** — for voice campaigns, contacts are split into call list chunks for parallel processing.
+4. **Execution begins** — calls are placed or messages are sent according to the configured concurrency limit.
+5. **Results are tracked** — each contact's outcome status is updated in real time on the dashboard.

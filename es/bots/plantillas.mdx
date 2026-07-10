@@ -1,0 +1,65 @@
+---
+title: "Plantillas de Bot"
+description: "Crea bots rapidamente usando plantillas predefinidas"
+---
+
+<br />
+
+Las plantillas permiten crear bots con flujos conversacionales pre-configurados, acelerando el tiempo de desarrollo.
+
+## Que es una plantilla
+
+Una plantilla es un bot completo (flujo + configuracion) que sirve como punto de partida. Incluye:
+
+- **Flujo conversacional** con nodos y conexiones pre-definidos
+- **Configuracion de voz** (TTS, STT, LLM)
+- **Variables de plantilla** que se reemplazan al crear el bot (ej. `${templateCompanyName}`)
+- **Parametros del bot** (columnas CSV para campanas outbound)
+
+## Crear un bot desde plantilla
+
+<Steps>
+  <Step title="Abrir el modal de creacion">
+    Haz clic en **"New bot"** en el panel lateral.
+  </Step>
+  <Step title="Seleccionar una plantilla">
+    En la seccion **"Use a template"**, navega por las plantillas disponibles para tu proyecto. Cada tarjeta muestra el nombre y descripcion de la plantilla.
+  </Step>
+  <Step title="Confirmar seleccion">
+    Haz clic en la plantilla deseada. Un dialogo preguntara: *"Would you like to use the template [nombre]?"*. Haz clic en **"Continue"**.
+  </Step>
+  <Step title="Configurar variables">
+    Se abrira un formulario con:
+
+    | Campo | Descripcion |
+    |---|---|
+    | **Bot name** | Nombre para tu nuevo bot (requerido) |
+    | **Template description** | Descripcion de la plantilla (solo lectura) |
+    | **Variables** | Tabla editable con las variables de la plantilla |
+    | **Parameters** | Lista de parametros del bot (solo lectura) |
+
+    Completa cada variable con el valor correspondiente a tu caso de uso.
+  </Step>
+  <Step title="Crear el bot">
+    Haz clic en **"Create bot"** y confirma. El bot se crea con el flujo de la plantilla y las variables reemplazadas.
+  </Step>
+</Steps>
+
+## Variables de plantilla
+
+Las variables usan el formato `${nombreVariable}` y se reemplazan automaticamente al crear el bot. Ejemplos comunes:
+
+| Variable | Descripcion | Ejemplo |
+|---|---|---|
+| `${templateCompanyName}` | Nombre de la empresa | "Acme Corp" |
+| `${templateAgentName}` | Nombre del agente virtual | "Sofia" |
+| `${templateLanguage}` | Idioma de atencion | "espanol" |
+| `${templateSchedule}` | Horario de atencion | "Lunes a viernes, 9am-6pm" |
+
+## Administrar plantillas (Admin)
+
+<Info>
+  La gestion de plantillas requiere rol **Root** o **Superadmin**.
+</Info>
+
+Los administradores pueden crear, editar y eliminar plantillas desde la vista de administracion.

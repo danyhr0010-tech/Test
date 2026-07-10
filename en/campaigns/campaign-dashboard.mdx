@@ -1,0 +1,94 @@
+---
+title: "Campaign Dashboard"
+description: "Monitor campaign execution with real-time statistics and detailed results"
+---
+
+<br />
+
+The Campaign Dashboard provides a real-time view of a campaign run's progress, including aggregate statistics, per-contact results, and data export options.
+
+## Accessing the dashboard
+
+Click the **Dashboard** action on any campaign row that has been executed. The dashboard loads the most recent run by default.
+
+## Header cards
+
+The top section displays four summary cards:
+
+| Card | Content |
+|---|---|
+| **Run selector** | Dropdown to switch between different runs of the same campaign. Includes a reload button (2-minute cooldown). |
+| **Campaign info** | Campaign name and ID (click to copy). |
+| **Run date** | Date and time the selected run was executed. |
+| **Registers** | Total register count and phone count. Click **"More details"** to see max simultaneous calls and trunk type configuration. |
+
+## Statistics
+
+Twelve metric cards display the breakdown of contact outcomes. Each card shows the count and percentage of total contacts:
+
+<span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished</span> <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_successful</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>pending</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>in_progress</span> <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_answer</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>voicemail</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>answer_no_reply</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished_asr</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_failed</span> <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_botflow</span> <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_open_websocket</span> <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_call</span>
+
+## Register table
+
+Below the statistics, a detailed table lists every contact in the run:
+
+| Column | Description |
+|---|---|
+| **Register ID** | Unique identifier for the contact (sortable) |
+| **To Phone** | Target phone number |
+| **Status** | Outcome status badge |
+
+### Status filter
+
+Use the status dropdown at the top of the table to filter registers by one or more outcome statuses. The filter options are populated dynamically from the run data.
+
+### Inspecting a register
+
+Click on a register row to view its details:
+
+| Tab | Content |
+|---|---|
+| **Params** | The input parameters sent to the bot for this contact (from the CSV columns) |
+| **Results** | The conversation results showing the bot flow path — node name, classification, and user transcription |
+
+## Call list panel
+
+For voice campaigns, the dashboard includes a call list management panel:
+
+| Element | Description |
+|---|---|
+| **Call list status** | Current status of each call list chunk |
+| **Stop** | Halt the active call list |
+| **Recover** | Resume a stopped call list |
+| **Download** | Export results as CSV |
+
+### Call list statuses
+
+| Status | Description |
+|---|---|
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Completed</span> | All calls in the list have finished |
+| <span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>In progress</span> | Calls are currently being placed |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Canceled</span> | The call list was stopped by a user |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Error</span> | The call list failed to process |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Mixed statuses</span> | Multiple call lists in the run have different statuses |
+
+### External dialer panel
+
+When using an external dialer trunk type, an additional panel shows:
+
+| Element | Description |
+|---|---|
+| **Dialer status** | Current status (<span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>in_progress</span>, <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>queued</span>, <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>completed</span>, or <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>canceled</span>) |
+| **Countdown timer** | Time remaining until the configured time limit expires |
+| **Cancel** | Cancel the external dialer execution |
+
+## CSV download
+
+From the dashboard you can export run results as a CSV file:
+
+1. Click the **Download** button.
+2. Optionally filter by status or state values before exporting.
+3. The modal shows the filtered quantity and unique contact count.
+4. Click **Download** to generate and save the CSV.
+
+The exported file includes the contact phone numbers and input parameters, named with the campaign name and timestamp.

@@ -1,0 +1,94 @@
+---
+title: "Panel de Campaña"
+description: "Monitorea la ejecución de campañas con estadísticas en tiempo real y resultados detallados"
+---
+
+<br />
+
+El Panel de Campaña proporciona una vista en tiempo real del progreso de una ejecución, incluyendo estadísticas agregadas, resultados por contacto y opciones de exportación de datos.
+
+## Acceder al panel
+
+Haz clic en la acción **Dashboard** en cualquier fila de campaña que haya sido ejecutada. El panel carga la ejecución más reciente por defecto.
+
+## Tarjetas de encabezado
+
+La sección superior muestra cuatro tarjetas resumen:
+
+| Tarjeta | Contenido |
+|---|---|
+| **Selector de ejecución** | Desplegable para cambiar entre diferentes ejecuciones de la misma campaña. Incluye un botón de recarga (tiempo de espera de 2 minutos). |
+| **Info de campaña** | Nombre e ID de la campaña (clic para copiar). |
+| **Fecha de ejecución** | Fecha y hora en que se ejecutó el run seleccionado. |
+| **Registros** | Conteo total de registros y teléfonos. Clic en **"More details"** para ver llamadas simultáneas máximas y configuración de troncal. |
+
+## Estadísticas
+
+Doce tarjetas de métricas muestran el desglose de resultados por contacto. Cada tarjeta muestra el conteo y porcentaje del total de contactos:
+
+<span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished</span> <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_successful</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>pending</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>in_progress</span> <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_answer</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>voicemail</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>answer_no_reply</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished_asr</span> <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_failed</span> <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_botflow</span> <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_open_websocket</span> <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_call</span>
+
+## Tabla de registros
+
+Debajo de las estadísticas, una tabla detallada lista cada contacto en la ejecución:
+
+| Columna | Descripción |
+|---|---|
+| **Register ID** | Identificador único del contacto (ordenable) |
+| **To Phone** | Número telefónico destino |
+| **Status** | Badge de estado del resultado |
+
+### Filtro por estado
+
+Usa el desplegable de estado en la parte superior de la tabla para filtrar registros por uno o más estados de resultado. Las opciones de filtro se completan dinámicamente desde los datos de la ejecución.
+
+### Inspeccionar un registro
+
+Haz clic en una fila de registro para ver sus detalles:
+
+| Pestaña | Contenido |
+|---|---|
+| **Params** | Los parámetros de entrada enviados al bot para este contacto (de las columnas del CSV) |
+| **Results** | Los resultados de la conversación mostrando la ruta del flujo del bot — nombre del nodo, clasificación y transcripción del usuario |
+
+## Panel de lista de llamadas
+
+Para campañas de voz, el panel incluye una sección de gestión de listas de llamadas:
+
+| Elemento | Descripción |
+|---|---|
+| **Estado de lista** | Estado actual de cada lote de lista de llamadas |
+| **Stop** | Detener la lista de llamadas activa |
+| **Recover** | Reanudar una lista de llamadas detenida |
+| **Download** | Exportar resultados como CSV |
+
+### Estados de lista de llamadas
+
+| Estado | Descripción |
+|---|---|
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Completed</span> | Todas las llamadas de la lista han finalizado |
+| <span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>In progress</span> | Las llamadas se están realizando actualmente |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Canceled</span> | La lista de llamadas fue detenida por un usuario |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Error</span> | La lista de llamadas falló al procesarse |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Mixed statuses</span> | Múltiples listas de llamadas en la ejecución tienen estados diferentes |
+
+### Panel de marcador externo
+
+Cuando se usa un tipo de troncal External Dialer, un panel adicional muestra:
+
+| Elemento | Descripción |
+|---|---|
+| **Estado del marcador** | Estado actual (<span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>in_progress</span>, <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>queued</span>, <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>completed</span>, o <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>canceled</span>) |
+| **Temporizador** | Tiempo restante hasta que expire el límite de tiempo configurado |
+| **Cancelar** | Cancela la ejecución del marcador externo |
+
+## Descarga de CSV
+
+Desde el panel puedes exportar los resultados de la ejecución como archivo CSV:
+
+1. Haz clic en el botón **Download**.
+2. Opcionalmente filtra por estado o valores de state antes de exportar.
+3. El modal muestra la cantidad filtrada y el conteo de contactos únicos.
+4. Haz clic en **Download** para generar y guardar el CSV.
+
+El archivo exportado incluye los números telefónicos de contacto y parámetros de entrada, nombrado con el nombre de la campaña y marca de tiempo.

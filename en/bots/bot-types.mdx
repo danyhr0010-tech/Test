@@ -1,0 +1,81 @@
+---
+title: "Bot Types"
+description: "Learn about the different bot types available in AI Studio and their use cases"
+---
+
+<br />
+
+AI Studio supports 5 bot types, each optimized for different channels and use cases.
+
+## Comparison
+
+| Type | Channel | AI/LLM | Use case |
+|---|---|---|---|
+| **VoiceBot** | Telephony | No (rules) | Traditional IVR, option menus |
+| **VoiceAgent** | Telephony | Yes (LLM) | Conversational customer service, sales |
+| **ChatBot** | WhatsApp/Chat | No (rules) | Text support, notifications |
+| **Avatar** | Web | Yes (LLM + video) | Interactive visual assistance |
+| **ApiBot** | API | Configurable | Backend-to-backend integrations |
+
+---
+
+## VoiceBot
+
+<Card title="Rule-based voice bot" icon="phone">
+  Ideal for traditional IVR flows with option menus and predefined responses.
+</Card>
+
+- Uses speech recognition (ASR)
+- NLP processing with generative or rule-based modes
+- DTMF keypad input support
+- Nodes with predefined outputs that determine navigation
+
+---
+
+## VoiceAgent
+
+<Card title="AI-powered voice agent" icon="robot">
+  The most advanced type. Uses LLMs to maintain natural conversations and execute actions.
+</Card>
+
+- Powered by LLMs for natural conversation
+- High-quality TTS (ElevenLabs, Microsoft Azure)
+- Callable functions (tools) to execute actions
+- RAG for querying knowledge bases
+- Pre/post node actions (transfers, TTS, end call)
+- Context strategies (append, reset, reset_with_summary)
+
+### Key capabilities
+
+| Feature | Description |
+|---|---|
+| **Role Messages** | Defines the agent's global personality |
+| **Task Messages** | Node-specific instructions |
+| **Functions** | Tools the LLM can invoke |
+| **RAG** | Vector queries for knowledge base lookups |
+| **Context Strategy** | Conversation history control |
+| **Pre/Post Actions** | Action automation |
+
+---
+
+## ChatBot
+
+<Card title="Text bot for messaging" icon="comments">
+  Designed for text channels like WhatsApp. Supports rich messages.
+</Card>
+
+- Text messages, interactive buttons, lists, and templates
+- WhatsApp Business API integration
+- Rule-based flow with defined outputs
+
+---
+
+## ApiBot
+
+<Card title="Bot for API integrations" icon="bolt">
+  Headless bot for backend-to-backend integrations via API.
+</Card>
+
+- No direct user interface
+- Invoked programmatically
+- Ideal for automations and pipelines

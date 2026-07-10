@@ -1,0 +1,100 @@
+---
+title: "Conversation Flow"
+description: "Learn how to design and edit conversation flows in the AI Studio visual editor"
+---
+
+<br />
+
+The conversation flow defines the structure of your bot's conversation. It is designed using a **graph-based visual editor** (React Flow) where each node represents a step and connections (edges) determine transitions.
+
+## Flow structure
+
+A flow is composed of:
+
+| Element | Description |
+|---|---|
+| **Nodes** | Individual conversation steps |
+| **Edges** | Connections/transitions between nodes |
+| **Index Map** | Internal routing map (node -> index) |
+| **Node End Call Index** | Index of the node that ends the call |
+
+## Visual editor
+
+The visual editor is located in the main canvas of the Bots page. It offers the following actions from the toolbar:
+
+| Action | Description |
+|---|---|
+| **Add Node** | Add a new node to the canvas |
+| **Save** | Save the current flow |
+| **Clone** | Create a new version of the bot |
+| **Bot Config** | Open global configuration (voice, LLM, STT) |
+| **Upload** | Import a flow from a JSON file |
+| **Download** | Export the current flow as JSON |
+
+## Editing a node
+
+Click a node on the canvas to open the **editing panel** (side drawer). The form changes based on bot type:
+
+<Tabs>
+  <Tab title="VoiceAgent">
+    The VoiceAgent form has 5 tabs:
+
+    1. **General** - Name, node type (initial/node), respond immediately, context strategy
+    2. **Messages** - Role messages (personality), task messages (instructions), data messages (variables)
+    3. **Functions** - Callable tools with properties, handler mode, and target node
+    4. **RAG** - Vector data sources for contextual queries
+    5. **Actions** - Pre-actions and post-actions (function, tts_say, transfer, end_conversation)
+  </Tab>
+  <Tab title="VoiceBot">
+    - ASR configuration (language, model)
+    - Audio configuration (autostop)
+    - STT + NLP Pipeline
+    - Outputs with response messages
+    - Keypad configuration
+  </Tab>
+  <Tab title="ChatBot">
+    - Message type (text, buttons, list, template)
+    - Message content
+    - Navigation outputs
+  </Tab>
+</Tabs>
+
+## Connections between nodes
+
+### VoiceAgent (automatic)
+
+In VoiceAgent bots, connections are generated **automatically** from the `next_node` field of each function. They are not drawn manually.
+
+The system performs an **edge reconciliation** that synchronizes visual connections with function definitions.
+
+### VoiceBot / ChatBot (manual)
+
+Drag from an output handle of one node to the input handle of another node to create a connection.
+
+## Saving the flow
+
+When you click **Save**, the system:
+
+1. Serializes all nodes (removes internal React properties)
+2. Builds the routing `index_map`
+3. Extracts bot parameters (`param_*` variables)
+4. Saves the complete flow
+5. Shows a success or error notification
+
+## Import / Export
+
+- **Download**: Export the flow as a `.json` file for backup or migration
+- **Upload**: Import a previously exported `.json` file to restore or copy flows between bots
+
+## Versioning
+
+To create a new version, click **"Clone"** in the toolbar. An exact copy of the bot will be created with an incremented version number (e.g., `00001` → `00002`).
+
+Assign an environment tag to each version:
+
+| Tag | Usage |
+|---|---|
+| <span style={{backgroundColor: '#722ED1', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Dev</span> | Development and testing |
+| <span style={{backgroundColor: '#FAAD14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>QA</span> | Quality assurance |
+| <span style={{backgroundColor: '#1677FF', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Stage</span> | Pre-production |
+| <span style={{backgroundColor: '#52C41A', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Prod</span> | Production |

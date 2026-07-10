@@ -1,0 +1,40 @@
+---
+title: "Crear un Bot"
+description: "Guia detallada para crear un bot en AI Studio desde la interfaz web o la API"
+---
+
+<br />
+
+Existen dos formas de crear un bot en AI Studio: desde la **interfaz web** o mediante la **API REST**.
+
+## Desde la interfaz web
+
+<Steps>
+  <Step title="Acceder a la pagina de Bots">
+    Inicia sesion en AI Studio. La pagina principal muestra la seccion de Bots con el panel lateral y el canvas de edicion.
+
+    <Frame caption="AI Studio - Pagina de Bots">
+      <img src="/images/bots-page.png" />
+    </Frame>
+  </Step>
+  <Step title="Abrir el formulario de creacion">
+    Haz clic en **"New bot"** en el panel lateral izquierdo.
+
+    <Frame caption="Modal para crear un nuevo bot">
+      <img src="/images/create-bot-modal.png" />
+    </Frame>
+  </Step>
+  <Step title="Completar los campos">
+    | Campo | Descripcion |
+    |---|---|
+    | **Bot Name** | Nombre unico para identificar tu bot |
+    | **Bot Type** | `voicebot`, `voiceagent`, `chatbot` o `apibot` |
+
+    <Frame caption="Seleccionando un tipo de bot">
+      <img src="/images/bot-type-select.png" />
+    </Frame>
+  </Step>
+  <Step title="Crear">
+    Haz clic en **"Create"**. El bot se crea con version `00001` y tag `dev`.
+  </Step>
+</Steps>

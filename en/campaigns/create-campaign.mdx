@@ -1,0 +1,147 @@
+---
+title: "Create a Campaign"
+description: "Manage outbound communication campaigns with your bots"
+---
+
+<br />
+
+A **campaign** is a batch outbound operation that automatically contacts a list of phone numbers using one of your bots. You upload a CSV with contacts, link the campaign to a bot version, and execute it — the system handles the rest.
+
+Campaigns support two execution modes depending on the bot type:
+
+| Mode | Bot Types | Channel |
+|---|---|---|
+| **Voice** | VoiceBot, VoiceAgent | Phone calls |
+| **Chat** | ChatBot | WhatsApp messages |
+
+## Outbound vs inbound
+
+| Type | Description |
+|---|---|
+| **Outbound** | The system initiates contact with each phone number in the list. This is the default mode. |
+| **Inbound** | The system waits for incoming contacts. Inbound campaigns cannot be manually run from the UI. |
+
+## Accessing campaigns
+
+Navigate to **Campaigns** from the main menu. The page displays all campaigns for the selected project.
+
+## Campaign list
+
+The table shows the following columns:
+
+| Column | Description |
+|---|---|
+| **Date** | Campaign creation date |
+| **Campaign name** | Display name given during creation |
+| **Bot** | Associated bot name and version |
+| **Registers qty** | Number of contact registers loaded |
+
+## Filtering and sorting
+
+| Column | Filter | Sort |
+|---|---|---|
+| **Date** | Date picker dropdown | — |
+| **Campaign name** | Text search (case-insensitive) | Alphabetical |
+| **Bot** | Text search (case-insensitive) | — |
+| **Registers qty** | — | — |
+
+## Campaign actions
+
+From each row you can:
+
+| Action | Description |
+|---|---|
+| **Info** | View campaign details (ID, bot, file name, dates) |
+| **Run** | Execute the campaign (opens the run modal) |
+| **Registers** | View all loaded registers (phone numbers and parameters) |
+| **Update** | Upload additional CSV registers to the campaign |
+| **Dashboard** | Open the analytics dashboard for a completed run |
+
+## Create a campaign
+
+<Steps>
+  <Step title="Open the creation form">
+    Click **"New campaign"** in the top toolbar of the Campaigns page.
+  </Step>
+  <Step title="Name your campaign">
+    Enter a descriptive name for the campaign.
+  </Step>
+  <Step title="Select a bot">
+    Use the bot selector to choose a bot and version. The selector shows bots grouped by name, with available versions listed below each one.
+
+    The bot type determines the execution channel:
+    - **VoiceBot / VoiceAgent** — phone calls
+    - **ChatBot** — WhatsApp messages
+
+    <Note>Avatar bots are not available for campaigns.</Note>
+  </Step>
+  <Step title="Upload your CSV file">
+    Upload a CSV file containing the contacts for the campaign.
+
+    <a href="/files/sample-campaign.csv" download>Download sample CSV</a>
+
+    **CSV format requirements:**
+
+    | Requirement | Details |
+    |---|---|
+    | **Required column** | `to_phone` — the target phone number for each contact |
+    | **Phone format** | 7 to 16 digits, must start with a non-zero digit |
+    | **Delimiter** | Semicolon (`;`) separates columns |
+    | **Additional columns** | Must use the `param_` prefix followed by the parameter name defined in your bot flow (e.g., `param_name`, `param_account_number`) |
+    | **Multi-phone** | A single `to_phone` field can contain multiple phone numbers separated by commas |
+
+    After uploading, the system displays the total number of records and phone numbers detected.
+
+    <Warning>The maximum number of registers per campaign is 15,000.</Warning>
+  </Step>
+  <Step title="Configure auto-run (optional)">
+    Toggle **Auto-run** to start the campaign immediately after creation.
+
+    Auto-run availability depends on your organization's telephony or messaging configuration:
+    - **Voice campaigns** — requires a valid trunk (phone line or SIP) configuration
+    - **Chat campaigns** — requires a configured WhatsApp number
+
+    When auto-run is disabled, the campaign is created but must be manually executed from the campaign list.
+  </Step>
+  <Step title="Create">
+    Click **"Create"** to finalize. The system processes and validates your contacts in the background.
+
+    If any records fail validation, you can download the unprocessed records as a CSV.
+  </Step>
+</Steps>
+
+## Advanced options
+
+During creation you can configure retry behavior for the campaign:
+
+### Reply statuses
+
+Select which conversation outcome statuses should be eligible for re-processing when the campaign is run again. For example, you might choose to retry only contacts that resulted in `no_answer` or `voicemail`.
+
+Available statuses:
+
+| Status | Description |
+|---|---|
+| <span style={{backgroundColor: '#d9d9d9', color: '#595959', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>pending</span> | Contact is queued |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_call</span> | Call was never placed |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_open_websocket</span> | Connection failed |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>error_botflow</span> | Bot flow error |
+| <span style={{backgroundColor: '#ff4d4f', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_failed</span> | Transfer failed |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>no_answer</span> | Not answered |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>voicemail</span> | Reached voicemail |
+| <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>answer_no_reply</span> | Connected but no response |
+| <span style={{backgroundColor: '#1677ff', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>in_progress</span> | Currently active |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished_asr</span> | Reached final node |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>finished</span> | Completed |
+| <span style={{backgroundColor: '#52c41a', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>transfer_successful</span> | Transfer succeeded |
+
+### Reply states
+
+Define key-value pairs that filter contacts based on custom conversation state values. Only contacts matching the specified state criteria will be included in subsequent runs.
+
+## Required roles
+
+| Action | Roles |
+|---|---|
+| View campaigns | All authenticated users |
+| Create, run, or update campaigns | Admin, Developer, Tester |

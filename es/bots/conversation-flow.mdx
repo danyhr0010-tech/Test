@@ -1,0 +1,100 @@
+---
+title: "Flujo Conversacional"
+description: "Aprende a diseñar y editar flujos conversacionales en el editor visual de AI Studio"
+---
+
+<br />
+
+El flujo conversacional define la estructura de la conversación de tu bot. Se diseña usando un **editor visual basado en grafos** (React Flow) donde cada nodo representa un paso y las conexiones (edges) determinan las transiciones.
+
+## Estructura del flujo
+
+Un flujo se compone de:
+
+| Elemento | Descripción |
+|---|---|
+| **Nodes** | Pasos individuales de la conversación |
+| **Edges** | Conexiones/transiciones entre nodos |
+| **Index Map** | Mapa de routing interno (nodo -> índice) |
+| **Node End Call Index** | Índice del nodo que finaliza la llamada |
+
+## Editor visual
+
+El editor visual se encuentra en el canvas principal de la página de Bots. Ofrece las siguientes acciones desde la barra de herramientas:
+
+| Acción | Descripción |
+|---|---|
+| **Add Node** | Agrega un nuevo nodo al canvas |
+| **Save** | Guarda el flujo actual |
+| **Clone** | Crea una nueva versión del bot |
+| **Bot Config** | Abre la configuración global (voz, LLM, STT) |
+| **Upload** | Importa un flujo desde archivo JSON |
+| **Download** | Exporta el flujo actual como JSON |
+
+## Editar un nodo
+
+Haz clic en un nodo del canvas para abrir el **panel de edición** (drawer lateral). El formulario cambia según el tipo de bot:
+
+<Tabs>
+  <Tab title="VoiceAgent">
+    El formulario de VoiceAgent tiene 5 pestañas:
+
+    1. **General** - Nombre, tipo de nodo (initial/node), respond immediately, context strategy
+    2. **Messages** - Role messages (personalidad), task messages (instrucciones), data messages (variables)
+    3. **Functions** - Herramientas invocables con propiedades, handler mode y nodo destino
+    4. **RAG** - Fuentes de datos vectoriales para consultas contextuales
+    5. **Actions** - Pre-actions y post-actions (function, tts_say, transfer, end_conversation)
+  </Tab>
+  <Tab title="VoiceBot">
+    - Configuración ASR (idioma, modelo)
+    - Configuración de audio (autostop)
+    - Pipeline STT + NLP
+    - Outputs con mensajes de respuesta
+    - Configuración de teclado (keypad)
+  </Tab>
+  <Tab title="ChatBot">
+    - Tipo de mensaje (texto, botones, lista, template)
+    - Contenido del mensaje
+    - Outputs de navegación
+  </Tab>
+</Tabs>
+
+## Conexiones entre nodos
+
+### VoiceAgent (automáticas)
+
+En bots VoiceAgent, las conexiones se generan **automáticamente** a partir del campo `next_node` de cada función. No se dibujan manualmente.
+
+El sistema ejecuta una **reconciliación de edges** que sincroniza las conexiones visuales con las definiciones de funciones.
+
+### VoiceBot / ChatBot (manuales)
+
+Arrastra desde un handle de salida (output) de un nodo hacia el handle de entrada de otro nodo para crear una conexión.
+
+## Guardar el flujo
+
+Al hacer clic en **Save**, el sistema:
+
+1. Serializa todos los nodos (elimina propiedades internas de React)
+2. Construye el `index_map` de routing
+3. Extrae los parámetros del bot (variables `param_*`)
+4. Guarda el flujo completo
+5. Muestra una notificación de éxito o error
+
+## Importar / Exportar
+
+- **Download**: Exporta el flujo como archivo `.json` para backup o migración
+- **Upload**: Importa un archivo `.json` previamente exportado para restaurar o copiar flujos entre bots
+
+## Versionamiento
+
+Para crear una nueva versión, haz clic en **"Clone"** en la barra de herramientas. Se creará una copia exacta del bot con un número de versión incrementado (ej. `00001` → `00002`).
+
+Asigna un tag de entorno a cada versión:
+
+| Tag | Uso |
+|---|---|
+| <span style={{backgroundColor: '#722ED1', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Dev</span> | Desarrollo y pruebas |
+| <span style={{backgroundColor: '#FAAD14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>QA</span> | Control de calidad |
+| <span style={{backgroundColor: '#1677FF', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Stage</span> | Pre-producción |
+| <span style={{backgroundColor: '#52C41A', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Prod</span> | Producción |

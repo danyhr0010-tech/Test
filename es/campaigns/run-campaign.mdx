@@ -1,0 +1,69 @@
+---
+title: "Ejecutar una Campaña"
+description: "Ejecuta una campaña para contactar tu lista por llamadas de voz o WhatsApp"
+---
+
+<br />
+
+Una vez creada la campaña, puedes ejecutarla una o más veces. Cada ejecución crea un **run** independiente con sus propios análisis y resultados. El proceso de ejecución varía según el tipo de bot.
+
+## Ejecutar una campaña de voz
+
+Para campañas de VoiceBot y VoiceAgent, haz clic en **Run** en la fila de la campaña para abrir la configuración de lista de llamadas.
+
+### Opciones de lista de llamadas
+
+| Opción | Descripción |
+|---|---|
+| **Trunk type** | El método de conexión telefónica para llamadas salientes (ver abajo) |
+| **Max simultaneous calls** | Número máximo de llamadas concurrentes durante la ejecución |
+| **Phone regex** | Expresión regular opcional para filtrar qué número marcar cuando un contacto tiene múltiples números |
+| **RTC mode** | <span style={{backgroundColor: '#faad14', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px'}}>Beta</span> Habilita el modo de comunicación en tiempo real |
+
+### Tipos de troncal
+
+El tipo de troncal determina cómo se conectan las llamadas salientes:
+
+| Tipo de Troncal | Descripción |
+|---|---|
+| **PSTN** | Llamadas por red telefónica estándar usando un caller ID configurado |
+| **SIP** | Llamadas enrutadas a través de una conexión SIP con dirección de servidor y extensión |
+| **External Dialer** | Llamadas realizadas a través de un servicio de marcador externo con límite de tiempo configurable |
+
+<Note>El modo RTC se habilita automáticamente para el tipo de troncal External Dialer y bots VoiceAgent.</Note>
+
+## Ejecutar una campaña de chat
+
+Para campañas de ChatBot, haz clic en **Run** para abrir el modal de ejecución de chat. Selecciona el **número de WhatsApp** desde el cual enviar los mensajes y confirma la ejecución.
+
+## Re-ejecutar una campaña
+
+Puedes ejecutar la misma campaña múltiples veces. Cuando inicias una nueva ejecución en una campaña previamente ejecutada:
+
+1. El sistema detecta ejecuciones existentes y muestra sus fechas.
+2. Un diálogo de confirmación pregunta si deseas continuar.
+3. Si se configuraron estados de respuesta (reply statuses o states), solo los contactos que coincidan con esos filtros se incluirán en la nueva ejecución.
+
+Esto permite reintentar contactos que no contestaron, llegaron a buzón de voz u obtuvieron otros resultados en ejecuciones previas.
+
+## Detener una ejecución
+
+Para campañas de voz, puedes detener una ejecución activa desde el [Panel de Campaña](/es/campaigns/campaign-dashboard):
+
+| Acción | Descripción |
+|---|---|
+| **Stop call list** | Detiene la ejecución de la lista de llamadas actual. Las llamadas pendientes se cancelan. |
+| **Recover call list** | Reanuda una lista de llamadas previamente detenida. |
+| **Cancel external dialer** | Cancela una ejecución de marcador externo. |
+
+<Warning>Detener una lista de llamadas no se puede deshacer — las llamadas pendientes en esa lista no se realizarán. Usa **Recover** para reanudar si es necesario.</Warning>
+
+## Flujo de ejecución
+
+Cuando se ejecuta una campaña, el sistema procesa los contactos en segundo plano:
+
+1. **Los registros se preparan** — cada contacto del CSV se convierte en un registro de ejecución individual.
+2. **Selección de teléfono** — si los contactos tienen múltiples números y se proporcionó un filtro regex, se selecciona el número que coincida.
+3. **Los contactos se distribuyen** — para campañas de voz, los contactos se dividen en lotes de lista de llamadas para procesamiento paralelo.
+4. **La ejecución comienza** — las llamadas se realizan o los mensajes se envían según el límite de concurrencia configurado.
+5. **Los resultados se rastrean** — el estado de resultado de cada contacto se actualiza en tiempo real en el panel.

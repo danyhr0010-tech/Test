@@ -1,0 +1,113 @@
+---
+title: "Flujo Conversacional"
+description: "Aprende a disenar y editar flujos conversacionales en el editor visual de AI Studio"
+---
+
+<br />
+
+El flujo conversacional define la estructura de la conversacion de tu bot. Se diseña usando un **editor visual basado en grafos** (React Flow) donde cada nodo representa un paso y las conexiones (edges) determinan las transiciones.
+
+## Estructura del flujo
+
+Un flujo se compone de:
+
+| Elemento | Descripcion |
+|---|---|
+| **Nodes** | Pasos individuales de la conversacion |
+| **Edges** | Conexiones/transiciones entre nodos |
+| **Index Map** | Mapa de routing interno (nodo -> indice) |
+| **Node End Call Index** | Indice del nodo que finaliza la llamada |
+
+```json
+{
+  "bot_flow": {
+    "nodes": [...],
+    "edges": [...],
+    "index_map": { "node-1": 0, "node-2": 1 },
+    "node_end_call_index": 2
+  }
+}
+```
+
+## Editor visual
+
+El editor visual se encuentra en el canvas principal de la pagina de Bots. Ofrece las siguientes acciones desde la barra de herramientas:
+
+| Accion | Descripcion |
+|---|---|
+| **Add Node** | Agrega un nuevo nodo al canvas |
+| **Save** | Guarda el flujo actual |
+| **Clone** | Crea una nueva version del bot |
+| **Bot Config** | Abre la configuracion global (voz, LLM, STT) |
+| **Upload** | Importa un flujo desde archivo JSON |
+| **Download** | Exporta el flujo actual como JSON |
+
+## Editar un nodo
+
+Haz clic en un nodo del canvas para abrir el **panel de edicion** (drawer lateral). El formulario cambia segun el tipo de bot:
+
+<Tabs>
+  <Tab title="VoiceAgent">
+    El formulario de VoiceAgent tiene 5 pestanas:
+
+    1. **General** - Nombre, tipo de nodo (initial/node), respond immediately, context strategy
+    2. **Messages** - Role messages (personalidad), task messages (instrucciones), data messages (variables)
+    3. **Functions** - Herramientas invocables con propiedades, handler mode y nodo destino
+    4. **RAG** - Fuentes de datos vectoriales para consultas contextuales
+    5. **Actions** - Pre-actions y post-actions (function, tts_say, transfer, end_conversation)
+  </Tab>
+  <Tab title="VoiceBot">
+    - Configuracion ASR (idioma, modelo)
+    - Configuracion de audio (autostop)
+    - Pipeline STT + NLP
+    - Outputs con mensajes de respuesta
+    - Configuracion de teclado (keypad)
+  </Tab>
+  <Tab title="ChatBot">
+    - Tipo de mensaje (texto, botones, lista, template)
+    - Contenido del mensaje
+    - Outputs de navegacion
+  </Tab>
+</Tabs>
+
+## Conexiones entre nodos
+
+### VoiceAgent (automaticas)
+
+En bots VoiceAgent, las conexiones se generan **automaticamente** a partir del campo `next_node` de cada funcion. No se dibujan manualmente.
+
+```json
+{
+  "functions": [
+    {
+      "name": "ir_a_soporte",
+      "next_node": "nodo-soporte-id"
+    },
+    {
+      "name": "finalizar",
+      "handler": { "mode": "end_conversation" }
+    }
+  ]
+}
+```
+
+El sistema ejecuta una **reconciliacion de edges** que sincroniza las conexiones visuales con las definiciones de funciones.
+
+### VoiceBot / ChatBot (manuales)
+
+Arrastra desde un handle de salida (output) de un nodo hacia el handle de entrada de otro nodo para crear una conexion.
+
+## Guardar el flujo
+
+Al hacer clic en **Save**, el sistema:
+
+1. Serializa todos los nodos (elimina propiedades internas de React)
+2. Construye el `index_map` de routing
+3. Extrae los parametros del bot (variables `param_*`)
+4. Guarda el flujo completo
+5. Muestra una notificacion de exito o error
+
+## Importar / Exportar
+
+- **Download**: Exporta el flujo como archivo `.json` para backup o migracion
+- **Upload**: Importa un archivo `.json` previamente exportado para restaurar o copiar flujos entre bots
